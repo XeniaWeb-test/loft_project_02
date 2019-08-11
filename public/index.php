@@ -1,15 +1,14 @@
 <?php
 
-require_once '../src/Core/init.php';
+use App\Core\Router;
 
+define('APP_DIR', realpath(__DIR__ . DIRECTORY_SEPARATOR . '../src'));
+require_once APP_DIR . '/Core/init.php';
+require_once APP_DIR . '/Core/Router.php';
 
-echo 'я здесь!';
-use App\Core\ConnectDB;
-////$pdo = new PDO('mysql:host=127.0.0.1;dbname=oks_mvc', 'root', '');
-//
-$db = new ConnectDB();
+$route = new Router();
+try {
+    $route->run();
+} catch (\Exception $e) {
 
-$db->exec('INSERT into users (login, user_name, age, `description`) VALUES (:log, :nam, :age, :des)',
-    ['log' => 'Ух', 'nam' => 'Вася', 'age' => 55, 'des' => 'Обо мне' ]);
-
-$rrr = $db->fetchOne('SELECT * FROM users');
+}

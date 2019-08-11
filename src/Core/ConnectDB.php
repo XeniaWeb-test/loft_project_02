@@ -20,6 +20,7 @@ class ConnectDB
         }
         return $this->pdo;
     }
+
     public function exec(string $query, array $params = []): int
     {
         $pdo = $this->getConnectDB();
