@@ -1,0 +1,31 @@
+<?php
+?>
+
+<form class="form container" action="/file_upload" method="post" enctype="multipart/form-data"> <!-- form--invalid -->
+    <h2>Загрузка файлов</h2>
+
+    <div class="form__item">
+        <label for="message">Описание*</label>
+        <textarea id="message" name="file[about]" placeholder="Напишите несколько слов об этом файле" maxlength="255" required></textarea>
+    </div>
+    <div class="form__item form__item--file form__item--last ">
+        <label>Изображение*</label>
+        <div class="preview">
+            <button class="preview__remove" type="button">x</button>
+            <div class="preview__img">
+                <img src="img/avatar.jpg" width="113" height="113" alt="Ваш аватар">
+            </div>
+        </div>
+        <div class="form__input-file">
+            <input class="visually-hidden" type="file" id="photo2" name="jpg_img" value="" required>
+            <label for="photo2">
+                <span>+ Добавить</span>
+            </label>
+        </div>
+    </div>
+    <span class="form__error form__error--bottom">Пожалуйста, исправьте ошибки в форме.</span>
+    <button type="submit" class="button">Загрузить</button>
+</form>
+
+
+<!--https://echo.htmlacademy.ru-->

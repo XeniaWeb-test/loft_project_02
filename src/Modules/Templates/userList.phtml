@@ -9,14 +9,17 @@
         <th>Фотография</th>
         <th>Действия</th>
     </tr>
-    <tr>
-        <td>vasya99</td>
-        <td>Вася</td>
-        <td>14</td>
-        <td>Эксперт в спорах в интернете</td>
-        <td><img src="http://lorempixel.com/people/200/200/" alt=""></td>
-        <td>
-            <a href="">Удалить пользователя</a>
-        </td>
-    </tr>
+    <?php foreach ($list as $value) : ?>
+        <tr>
+            <td><?= $value->login ?></td>
+            <td><?= $value->user_name ?></td>
+            <td><?= $value->age ?></td>
+            <td><?= $value->descript ?></td>
+            <td><?= $value->avatar ?></td>
+            <td>
+                <a href="">Удалить пользователя</a>
+            </td>
+        </tr>
+    <?php endforeach; ?>
+
 </table>

@@ -36,9 +36,9 @@ class View
     function render($tplName, array $data) {
         $tplName = TPL_DIR  . $tplName;
         $result = '';
-//        var_dump($tplName);
+
         if (!file_exists($tplName)) {
-            echo 'Нет такого шаблона!';
+            // echo 'Нет такого шаблона!';
             return $result;
         }
 

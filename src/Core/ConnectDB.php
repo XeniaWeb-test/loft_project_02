@@ -36,7 +36,7 @@ class ConnectDB
         return $affectedRows;
     }
 
-    public function fetchAll(string $query , array $params = []): array
+    public function fetchAll(string $query , array $params = [])
     {
         $pdo = $this->getConnectDB();
         $prepared = $pdo->prepare($query);
@@ -46,7 +46,7 @@ class ConnectDB
             trigger_error("{$errorInfo[0]}#{$errorInfo[1]}: " . $errorInfo[2]);
             return [];
         }
-        $data = $prepared->fetchAll(\PDO::FETCH_ASSOC);
+        $data = $prepared->fetchAll(PDO::FETCH_OBJ);
 
         return $data;
     }
