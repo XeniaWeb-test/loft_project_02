@@ -1,8 +1,7 @@
 <?php
 
-namespace App\Modules\Models;
+namespace App\Models;
 
-use App\Core\ConnectDB;
 
 class UserModel
 {

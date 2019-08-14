@@ -1,9 +1,10 @@
 <?php
 
-namespace App\Core;
+namespace App\Models;
 
-use App\Modules\Controllers\FilesController;
-use App\Modules\Controllers\UserController;
+
+use App\Controllers\FilesController;
+use App\Controllers\UserController;
 
 class Router
 {

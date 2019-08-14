@@ -1,9 +1,10 @@
 {
   "autoload": {
     "psr-4": {
-      "App\\Tests\\": "src/Tests/",
-      "App\\Modules\\": "src/Modules/",
-      "App\\Core\\": "src/Core/"
+      "App\\": "src/",
+      "App\\Controllers\\": "src/Controllers/",
+      "App\\Models\\": "src/Models/",
+      "App\\Templates\\": "src/Templates/"
     }
   },
   "require": {

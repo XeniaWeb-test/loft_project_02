@@ -1,17 +1,20 @@
 <?php
 
-namespace App\Modules\Controllers;
+namespace App\Controllers;
 
-use App\Core\View;
-use App\Modules\Models\FileModel;
-use App\Modules\Models\UserModel;
+use App\Models\FileModel;
+use App\Models\UserModel;
+use App\Models\View;
 use Exception;
+
 
 class UserController
 {
     public function userAction()
     {
-
+//        if(!$_SESSION) {
+//            echo 'Сессия есть!'; die;
+//        }
         $render = new View();
         $authForm = $render->render('userAuth.phtml', [
 

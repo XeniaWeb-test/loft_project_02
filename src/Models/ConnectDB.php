@@ -1,8 +1,9 @@
 <?php
 
-namespace App\Core;
+namespace App\Models;
 
 use PDO;
+
 
 class ConnectDB
 {

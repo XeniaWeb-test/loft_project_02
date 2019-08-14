@@ -1,10 +1,10 @@
 <?php
 
 
-namespace App\Modules\Controllers;
+namespace App\Controllers;
 
-use App\Core\View;
-use App\Modules\Models\FileModel;
+use App\Models\FileModel;
+use App\Models\View;
 use Exception;
 
 class FilesController

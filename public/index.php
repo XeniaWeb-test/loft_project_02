@@ -1,11 +1,13 @@
 <?php
 
-use App\Core\Router;
+use App\Models\Router;
+
+session_start();
 
 define('APP_DIR', realpath(__DIR__ . DIRECTORY_SEPARATOR . '../src'));
-define('IMG_DIR', realpath(__DIR__ . DIRECTORY_SEPARATOR . '/img/'));
-require_once APP_DIR . '/Core/init.php';
-require_once APP_DIR . '/Core/Router.php';
+define('IMG_DIR', realpath($_SERVER['DOCUMENT_ROOT'] . DIRECTORY_SEPARATOR . '/img/'));
+require_once APP_DIR . '/init.php';
+//require_once APP_DIR . '/Models/Router.php';
 
 $route = new Router();
 try {
