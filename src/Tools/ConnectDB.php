@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Models;
+namespace App\Tools;
 
 use PDO;
 
@@ -51,7 +51,7 @@ class ConnectDB
 
         return $data;
     }
-    public function fetchOne(string $query , array $params = []): array
+    public function fetchOne(string $query , array $params = [])
     {
         $data = $this->fetchAll($query, $params);
         return $data ? reset($data) : [];

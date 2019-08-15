@@ -2,13 +2,22 @@
 
 namespace App\Models;
 
+use App\Tools\ConnectDB;
 
 class UserModel
 {
-    public function checkUniqueLogin(array $data)
+    public function checkUser(array $data)
     {
          $pdo = new ConnectDB();
          $user = $pdo->fetchOne('SELECT id FROM users WHERE login = :login',
+             ['login' => $data['login']]);
+
+         return $user;
+    }
+    public function checkUniqueLogin(array $data)
+    {
+         $pdo = new ConnectDB();
+         $user = $pdo->fetchAll('SELECT id FROM users WHERE login = :login',
              ['login' => $data['email']]);
     }
 

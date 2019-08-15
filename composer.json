@@ -4,7 +4,8 @@
       "App\\": "src/",
       "App\\Controllers\\": "src/Controllers/",
       "App\\Models\\": "src/Models/",
-      "App\\Templates\\": "src/Templates/"
+      "App\\Templates\\": "src/Templates/",
+      "App\\Tools\\": "src/Tools/"
     }
   },
   "require": {

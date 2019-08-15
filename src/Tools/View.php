@@ -1,8 +1,6 @@
 <?php
 
-
-namespace App\Models;
-
+namespace App\Tools;
 
 class View
 {

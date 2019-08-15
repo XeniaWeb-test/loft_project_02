@@ -1,15 +1,22 @@
 <?php
 
-namespace App\Models;
+namespace App\Controllers;
 
-
-use App\Controllers\FilesController;
-use App\Controllers\UserController;
-
-class Router
+class Router extends BaseController
 {
+    public function __construct()
+    {
+        parent::__construct();
+        $this->session();
+    }
+
+    protected function session()
+{
+    session_start();
+}
     public function run()
     {
+
         $user = new UserController();
         $files = new FilesController();
 
@@ -39,11 +46,10 @@ class Router
 
     private function showError($tplErr)
     {
-        $render = new View();
-        $errorRouting = $render->render($tplErr, [
+        $errorRouting = $this->view->render($tplErr, [
 
         ]);
-        $layoutContent = $render->render('layout.phtml', [
+        $layoutContent = $this->view->render('layout.phtml', [
             'content' => $errorRouting
         ]);
 

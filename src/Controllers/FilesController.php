@@ -1,21 +1,18 @@
 <?php
 
-
 namespace App\Controllers;
 
 use App\Models\FileModel;
-use App\Models\View;
 use Exception;
 
-class FilesController
+class FilesController extends BaseController
 {
     public function showUploadForm()
     {
-        $render = new View();
-        $fileForm = $render->render('loadFile.phtml', [
+        $fileForm = $this->view->render('loadFile.phtml', [
 
         ]);
-        $layoutContent = $render->render('layout.phtml', [
+        $layoutContent = $this->view->render('layout.phtml', [
             'content' => $fileForm
         ]);
 
@@ -50,11 +47,10 @@ class FilesController
         $model = new FileModel();
         $listf = $model->getFileList();
 
-        $render = new View();
-        $fileList = $render->render('fileList.phtml', [
+        $fileList = $this->view->render('fileList.phtml', [
             'listf' => $listf
         ]);
-        $layoutContent = $render->render('layout.phtml', [
+        $layoutContent = $this->view->render('layout.phtml', [
             'content' => $fileList
         ]);
 
