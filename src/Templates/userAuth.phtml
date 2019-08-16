@@ -1,23 +1,39 @@
-<div class="form-container">
-    <form class="form-horizontal" method="post" action="/login">
-        <div class="form-group">
-            <label for="inputEmail3" class="col-sm-2 control-label">Логин</label>
-            <div class="col-sm-10">
-                <input type="text" class="form-control" id="inputEmail3" name="old_user[login]" placeholder="Логин">
-            </div>
+<?php   if (!isset($_SESSION['userId'])): ?>
+
+<div class="container__login">
+
+    <!--https://echo.htmlacademy.ru-->
+    <?php $classname_form = isset($errors) ? "form--invalid" : ""; ?>
+    <h2 class="container__admin">Вход в личный кабинет</h2>
+    <form class="form container form-horizontal<?= $classname_form; ?>" action="/login" method="post"
+          enctype="multipart/form-data"> <!-- form--invalid -->
+
+        <?php $classname = isset($errors['login']) ? "form__item--invalid" : "";
+        $value = isset($old_user['login']) ? htmlspecialchars($old_user['login']) : ""; ?>
+        <div class="form__item <?= $classname; ?>"> <!-- form__item--invalid -->
+            <label for="login">Логин*</label>
+            <input id="login" type="text" name="old_user[login]" placeholder="Введите login" value="<?= $value; ?>">
+            <span class="form__error"><?= $errors['login'] ?? ""; ?></span>
         </div>
-        <div class="form-group">
-            <label for="inputPassword3" class="col-sm-2 control-label">Пароль</label>
-            <div class="col-sm-10">
-                <input type="password" class="form-control" id="inputPassword3" name="old_user[user_pass]" placeholder="Пароль">
-            </div>
+        <?php $classname = isset($errors['user_pass']) ? "form__item--invalid" : "";
+        $value = isset($old_user['user_pass']) ? htmlspecialchars($old_user['user_pass']) : ""; ?>
+        <div class="form__item form__item--last <?= $classname; ?>">
+            <label for="password">Пароль*</label>
+            <input id="password" type="password" name="old_user[user_pass]" placeholder="Введите пароль"
+                   value="<?= $value; ?>">
+            <span class="form__error"><?= $errors['user_pass'] ?? ""; ?></span>
         </div>
-        <div class="form-group">
-            <div class="col-sm-offset-2 col-sm-10">
-                <button type="submit" class="btn btn-default">Войти</button>
-                <br><br>
-                Нет аккаунта? <a href="/reg_form">Зарегистрируйтесь</a>
-            </div>
+        <div class="col-sm-offset-2 col-sm-10">
+            <button type="submit" class="btn btn-default">Войти</button>
+            <br><br>
+            Нет аккаунта? <a href="/reg_form">Зарегистрируйтесь</a>
         </div>
     </form>
 </div>
+<?php else: ?>
+<div class="container__login">
+    <h2>Вы уже вошли в личный кабинет</h2>
+<p class="admin"><a href="/logout">Выйти из Личного кабинета</a></p>
+</div>
+
+<?php endif; ?>

@@ -1,5 +1,10 @@
-<?php
-?>
+<?php   if (!isset($_SESSION['userId'])): ?>
+    <h1>Запретная зона, доступ только авторизированному пользователю</h1>
+    <div class="container__admin">
+        <p><a href="/reg_form">Зарегистрироваться</a></p>
+        <p>Уже есть аккаунт? <a href="/">Войти</a></p>
+    </div>
+<?php else: ?>
 
 <form class="form container" action="/file_upload" method="post" enctype="multipart/form-data"> <!-- form--invalid -->
     <h2>Загрузка файлов</h2>
@@ -26,6 +31,6 @@
     <span class="form__error form__error--bottom">Пожалуйста, исправьте ошибки в форме.</span>
     <button type="submit" class="button">Загрузить</button>
 </form>
-
+<?php endif; ?>
 
 <!--https://echo.htmlacademy.ru-->

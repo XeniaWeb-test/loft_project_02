@@ -39,7 +39,7 @@ class FilesController extends BaseController
         if(!isset($ret)) {
             throw new Exception('Загрузка не удалась.');
         }
-        header('Location: /file_list');
+        $this->redirect('/file_list');
     }
 
     public function showFiles()

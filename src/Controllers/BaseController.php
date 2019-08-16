@@ -11,6 +11,8 @@ abstract class BaseController
 
     protected $view;
 
+    protected $user;
+
     public function __construct()
     {
         $this->session = new Session();
@@ -19,7 +21,7 @@ abstract class BaseController
 
     protected function redirect($url)
     {
-        header('Location: ', $url);
+        header('Location: ' . $url);
         exit;
     }
 }

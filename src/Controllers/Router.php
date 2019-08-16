@@ -24,6 +24,8 @@ class Router extends BaseController
             $user->userAction();
         } elseif ($_SERVER['REQUEST_URI'] == '/login') {
             $user->loginUser();
+        } elseif ($_SERVER['REQUEST_URI'] == '/logout') {
+            $user->logout();
         } elseif ($_SERVER['REQUEST_URI'] == '/reg_form') {
             $user->showRegForm();
         } elseif ($_SERVER['REQUEST_URI'] == '/register') {
@@ -37,7 +39,7 @@ class Router extends BaseController
         } elseif ($_SERVER['REQUEST_URI'] == '/file_list') {
             $files->showFiles();
         } elseif ($_SERVER['REQUEST_URI'] == '/admin') {
-            print 'Минуточку, сейчас позову админа...';
+            $user->welcome();
         } else {
             header('Location: /');
             return null;

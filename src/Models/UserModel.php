@@ -3,16 +3,17 @@
 namespace App\Models;
 
 use App\Tools\ConnectDB;
+use PDO;
 
 class UserModel
 {
     public function checkUser(array $data)
     {
          $pdo = new ConnectDB();
-         $user = $pdo->fetchOne('SELECT id FROM users WHERE login = :login',
+         $userId = $pdo->fetchOne('SELECT id FROM users WHERE login = :login',
              ['login' => $data['login']]);
 
-         return $user;
+         return $userId;
     }
     public function checkUniqueLogin(array $data)
     {
@@ -21,21 +22,34 @@ class UserModel
              ['login' => $data['email']]);
     }
 
+    public function getAllAboutUserById($userId)
+    {
+        $pdo = new ConnectDB();
+        $userAll = $pdo->fetchOne('SELECT * FROM users WHERE id = :id',
+            ['id' => $userId]);
+
+        return $userAll;
+    }
+    public function getHashPass($user_pass)
+    {
+        return hash("sha256", $user_pass);
+    }
+
     public function saveUser(array $data)
     {
         $pdo = new ConnectDB();
         $sql = "INSERT into users (login, user_pass, user_name, age, descript) 
             VALUES (:login, :hash_pass, :user_name, :age, :descript)";
 
-        $user = $pdo->exec($sql, [
+        $newUserId = $pdo->exec($sql, [
             'login' => $data['login'],
-            'hash_pass' => hash("sha256", $data['user_pass']),
+            'hash_pass' => $this->getHashPass($data['user_pass']),
             'user_name' => $data['user_name'],
             'age' => $data['user_age'],
             'descript' => $data['descript']
         ]);
-        // TODO запись аватара в таблицу юзера или связь таблиц
-        return $user;
+
+        return $newUserId;
     }
 
     public function getUserList()

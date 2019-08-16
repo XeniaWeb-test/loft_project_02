@@ -30,10 +30,12 @@ class FileModel
         $sql = "INSERT into files (file_name, about, user_id) 
             VALUES (:file_name, :about, :user_id)";
 
+        $userId = $_SESSION['userId'];
+
         $user = $pdo->exec($sql, [
             'file_name' => $file_url,
             'about' => $data,
-            'user_id' => 1 // TODO $_SESSION['user_id']
+            'user_id' => $userId
         ]);
         return $user;
     }

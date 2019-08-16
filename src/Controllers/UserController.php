@@ -10,9 +10,6 @@ class UserController extends BaseController
 {
     public function userAction()
     {
-//        if(!$_SESSION) {
-//            echo 'Сессия есть!'; die;
-//        }
         $authForm =$this->view->render('userAuth.phtml', [
 
         ]);
@@ -27,27 +24,64 @@ class UserController extends BaseController
     {
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $old_user = $_POST['old_user'];
-
         }
+
         if (!empty($old_user['login'])) {
             $model = new UserModel();
-            $user = $model->checkUser($old_user);
-
-            if (!$user) {
-                $errors['email'] = 'Пользователь с таким E-mail не найден';
+            $userId = $model->checkUser($old_user);
+            $errors = [];
+            if (!$userId) {
+                $errors['login'] = 'Пользователь с таким Login не найден';
             }
-            if (!count($errors) and $user) {
-                if (password_verify($old_user['password'], $user['password'])) {
-                    $_SESSION['user'] = $user;
+            if (!count($errors) and $userId) {
+
+                $old_user['hash_pass'] =  $model->getHashPass($old_user['user_pass']);
+                $userAll = $model->getAllAboutUserById($userId->id);
+                if ($old_user['hash_pass'] === $userAll ->user_pass) {
+                    $this->session->login($userId->id);
                 } else {
-                    $errors['password'] = 'Вы ввели неверный пароль';
+                    $errors['user_pass'] = 'Вы ввели неверный пароль';
                 }
             }
         } else {
-            $errors['email'] = 'Введите действующий E-mail в правильном формате';
+            $errors['login'] = 'Введите действующий логин';
+//            $this->redirect('/');
+        }
+        if (count($errors)) {
+            $errors['form'] = 'Пожалуйста, исправьте ошибки в форме.';
+
+            $authForm =$this->view->render('userAuth.phtml', [
+                'old_user' => $old_user,
+                'errors' => $errors,
+                'user' => $userAll ?? null
+            ]);
+            $layoutContent = $this->view->render('layout.phtml', [
+                'content' => $authForm
+            ]);
+
+            print ($layoutContent);
+            exit;
+
+
+        } else {
+            $this->redirect('/admin');
         }
     }
+    public function welcome()
+    {
+        $model = new UserModel();
+        $myUser = $this->session->getUser();
+        $user = $model->getAllAboutUserById($myUser);
 
+        $adminHome = $this->view->render('admin.phtml', [
+            'user' => $user
+        ]);
+        $layoutContent = $this->view->render('layout.phtml', [
+            'content' => $adminHome
+        ]);
+
+        print ($layoutContent);
+    }
 /**
  * @return void
  * @throws Exception
@@ -72,8 +106,11 @@ class UserController extends BaseController
         }
         if (isset($new_user)) {
             $model = new UserModel();
-            $ret = $model->saveUser($new_user);
+            $newUserId = $model->saveUser($new_user);
 
+        }
+        if (isset($newUserId)) {
+            $this->session->login($newUserId);
         }
         if(isset($file) && isset($about)) {
             $model = new FileModel();
@@ -83,7 +120,8 @@ class UserController extends BaseController
             throw new Exception('Загрузка не удалась.');
         }
 
-        header('Location: /user_list'); // TODO relocate
+
+        $this->redirect('/admin');
     }
 
     public function showRegForm()
@@ -111,5 +149,15 @@ class UserController extends BaseController
         ]);
 
         print ($layoutContent);
+    }
+
+    public function logout()
+    {
+        $this->session->closeSession();
+        $this->redirect('/');
+    }
+    public function createUsers(array $new_user)
+    {
+
     }
 }

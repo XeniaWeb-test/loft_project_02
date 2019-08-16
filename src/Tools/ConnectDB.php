@@ -32,9 +32,10 @@ class ConnectDB
             trigger_error("{$errorInfo[0]}#{$errorInfo[1]}: " . $errorInfo[2]);
             return -1;
         }
-        $affectedRows = $prepared->rowCount();
 
-        return $affectedRows;
+        $lastUserID = $pdo->lastInsertId();
+
+        return $lastUserID;
     }
 
     public function fetchAll(string $query , array $params = [])
@@ -56,4 +57,9 @@ class ConnectDB
         $data = $this->fetchAll($query, $params);
         return $data ? reset($data) : [];
     }
+
+//    public function lastInsertId()
+//    {
+//
+//    }
 }

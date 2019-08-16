@@ -1,25 +1,32 @@
-<h1>Запретная зона, доступ только авторизированному пользователю</h1>
-<h2>Информация выводится из базы данных</h2>
-<table class="table table-bordered">
-    <tr>
-        <th>Пользователь(логин)</th>
-        <th>Имя</th>
-        <th>возраст</th>
-        <th>описание</th>
-        <th>Фотография</th>
-        <th>Действия</th>
-    </tr>
-    <?php foreach ($list as $value) : ?>
+<?php if (!isset($_SESSION['userId'])): ?>
+    <h1>Запретная зона, доступ только авторизированному пользователю</h1>
+    <div class="container__admin">
+        <p><a href="/reg_form">Зарегистрироваться</a></p>
+        <p>Уже есть аккаунт? <a href="/">Войти</a></p>
+    </div>
+<?php else: ?>
+    <h2>Информация выводится из базы данных</h2>
+    <table class="table table-bordered">
         <tr>
-            <td><?= $value->login ?></td>
-            <td><?= $value->user_name ?></td>
-            <td><?= $value->age ?></td>
-            <td><?= $value->descript ?></td>
-            <td><?= $value->avatar ?></td>
-            <td>
-                <a href="">Удалить пользователя</a>
-            </td>
+            <th>Пользователь(логин)</th>
+            <th>Имя</th>
+            <th>возраст</th>
+            <th>описание</th>
+            <th>Фотография</th>
+            <th>Действия</th>
         </tr>
-    <?php endforeach; ?>
+        <?php foreach ($list as $value) : ?>
+            <tr>
+                <td><?= $value->login ?></td>
+                <td><?= $value->user_name ?></td>
+                <td><?= $value->age ?></td>
+                <td><?= $value->descript ?></td>
+                <td><?= $value->avatar ?></td>
+                <td>
+                    <a href="">Удалить пользователя</a>
+                </td>
+            </tr>
+        <?php endforeach; ?>
 
-</table>
+    </table>
+<?php endif; ?>

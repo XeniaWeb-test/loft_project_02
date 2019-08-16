@@ -13,6 +13,25 @@ body {
   display: flex;
   justify-content: center;
 }
+.container__admin{
+  margin-top: 15%;
+  width: 100%;
+  text-align: center;
+  display: block;
+}
+
+.admin {
+  padding: 30px;
+}
+.left__list {
+  padding: 10px;
+  text-align: left;
+}
+.container h1 {
+  display: block;
+  margin: 0px auto;
+  text-align: center;
+}
 .form-horizontal {
   width: 35%;
 }
@@ -40,6 +59,8 @@ input.visually-hidden {
   clip: rect(0 0 0 0);
   overflow: hidden;
 }
+
+
 /* Форма Регистрация + Добавление лота */
 
 .form {
@@ -47,10 +68,11 @@ input.visually-hidden {
 }
 
 .form h2 {
-  padding-bottom: 15px;
+  padding-bottom: 30px;
 }
 
 .form__item {
+  text-align: left;
   width: 350px;
   margin: 0;
   margin-bottom: 14px;
@@ -97,6 +119,7 @@ input.visually-hidden {
   display: inline-block;
   vertical-align: middle;
   margin-right: 20px;
+  margin-bottom: 20px;
 }
 
 .form__item select {
@@ -233,4 +256,12 @@ input:invalid .form__error{
 
 .form__item--uploaded .preview {
   display: block;
+}
+
+h2.login__title {
+  margin-bottom: 40px;
+}
+
+.upload {
+  margin: 10px 10px 20px;
 }

@@ -1,0 +1,30 @@
+<?php   if (!isset($_SESSION['userId'])): ?>
+    <h2>Минуточку, сейчас позову админа...</h2>
+    <div class="container__admin">
+        <h1>Запретная зона, доступ только авторизированному пользователю</h1>
+        <div class="container__admin">
+            <p><a href="/reg_form">Зарегистрироваться</a></p>
+            <p>Уже есть аккаунт? <a href="/">Войти</a></p>
+
+        </div>
+    </div>
+<?php else: ?>
+    <div class="container__admin">
+        <h1>Добро пожаловать <?php echo $user->user_name ?? ''; ?>!</h1>
+
+        <p class="admin">
+            Напоминаю! Ваш ID : <?php echo $user->id ?? ''; ?>
+        </p>
+        <p>
+        <ul>
+            <li class="left__list"><a href="/user_list">Посмотреть всех пользователей</a></li>
+            <li class="left__list"><a href="/file_list">Посмотреть все загруженные файлы</a></li>
+            <li class="left__list"><a href="/upload">Загрузить новый файл</a></li>
+            <li class="left__list"><a href="/logout">Выйти из Личного кабинета</a></li>
+        </ul>
+
+
+        </p>
+    </div>
+
+<?php endif; ?>

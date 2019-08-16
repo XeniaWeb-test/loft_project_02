@@ -1,5 +1,12 @@
-<h1>Запретная зона, доступ только авторизированному пользователю</h1>
+<?php   if (!isset($_SESSION['userId'])): ?>
+    <h1>Запретная зона, доступ только авторизированному пользователю</h1>
+    <div class="container__admin">
+        <p><a href="/reg_form">Зарегистрироваться</a></p>
+        <p>Уже есть аккаунт? <a href="/">Войти</a></p>
+    </div>
+<?php else: ?>
 <h2>Информация выводится из списка файлов</h2>
+<button class="button upload"><a  href="/upload">Загрузить еще</a></button>
 <table class="table table-bordered">
     <tr>
         <th>Название файла</th>
@@ -17,3 +24,4 @@
     </tr>
     <?php endforeach; ?>
 </table>
+<?php endif; ?>

@@ -5,7 +5,7 @@ namespace App\Tools;
 
 class Session
 {
-    const KEY_USER = 'user';
+    const KEY_USER = 'userId';
 
     /**
      * Проверяет, является ли пользователь авторизованным
@@ -41,7 +41,7 @@ class Session
     /**
      * Завершение сессии
      */
-    public function logout()
+    public function closeSession()
     {
         $_SESSION[self::KEY_USER] = null;
     }
@@ -76,5 +76,14 @@ class Session
     public function getSession()
     {
         return $_SESSION;
+    }
+
+    /**
+     * Удалить сессии
+     *
+     */
+    public function end()
+    {
+        session_destroy();
     }
 }

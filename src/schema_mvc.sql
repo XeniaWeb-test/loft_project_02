@@ -10,7 +10,7 @@ CREATE TABLE users (
     user_name CHAR(128) NOT NULL,
     user_pass CHAR(128) NOT NULL,
     age INT(3) NOT NULL,
-    description CHAR(255),
+    descript CHAR(255),
     avatar CHAR(128),
     dt_add TIMESTAMP DEFAULT CURRENT_TIMESTAMP NOT NULL
 );
